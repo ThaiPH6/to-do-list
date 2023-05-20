@@ -1,0 +1,43 @@
+<div class="main-container">
+  <div class="header-content">
+    <h2>To Do List</h2>
+  </div>
+
+  <div class="body-content">
+    <div class="search-box">
+      <input type="text" id="search" name="search" placeholder="Search..." [(ngModel)]="filterWork" (ngModelChange)="applyWorkFilter($event)">
+      <button type="button" class="btn btn-success primary-button" style="margin-top: 15px;"
+        (click)="createNewWork()">Add</button>
+    </div>
+
+    <div class="list-work">
+      <ng-template ngFor let-work [ngForOf]="listWorks" let-i="index" [ngForTrackBy]="trackByFn">
+        <div class="work-to-do" [ngClass]="{'work-done': work.isDone === true}">
+          <div class="work-name">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="work.isChecking" id="flexCheckDefault" (ngModelChange)="onCheckWork($event, work.id)">
+            <label class="form-check-label work-title" for="flexCheckDefault">
+              {{work.title}}
+            </label>
+          </div>
+
+          <div class="action-field">
+            <button type="button" class="btn btn-info" (click)="showDetails(i)">Details</button>
+            <button type="button" class="btn btn-danger" style="margin-left: 15px;" (click)="deleteSingleWork(work.id)">Remove</button>
+          </div>
+        </div>
+
+        <div class="work-detail" *ngIf="currentWork === i">
+          <app-work-details [item]="work" (currentWork)="updateWorkSuccess($event)"></app-work-details>
+        </div>
+      </ng-template>
+    </div>
+
+    <div *ngIf="listWorkChecking.length > 0" class="bulk-action">
+      <label>Bulk Action:</label>
+      <div class="action-field">
+        <button type="button" class="btn btn-primary" (click)="finisheMultipleWorks()">Done</button>
+        <button type="button" class="btn btn-danger" style="margin-left: 15px;" (click)="deleteMultipleWorks()">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>

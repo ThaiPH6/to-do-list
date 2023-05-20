@@ -1,0 +1,37 @@
+<div class="body-detail">
+  <form [formGroup]="updateForm">
+    <input class="input-form" type="text" id="title" placeholder="Add new task..." formControlName="title" required>
+    <div *ngIf="fc['title'].hasError('required') && (fc['title'].dirty || fc['title'].touched)">
+      <p class="error-text">This field is required</p>
+    </div>
+
+    <div class="child-field description-field">
+      <p for="description" class="field-label">Description</p>
+      <textarea name="description" rows="6" style="width: 100%;" formControlName="description"></textarea>
+    </div>
+
+    <div class="child-field date-field row">
+      <div class="due-date col-6">
+        <p for="due-date" class="field-label">Due Date</p>
+        <input class="input-form" type="date" name="due-date" formControlName="dueDate"
+          (ngModelChange)="onChangeDate($event)">
+        <div *ngIf="fc['dueDate'].hasError('invalidDate') && (fc['dueDate'].dirty || fc['dueDate'].touched)">
+          <p class="error-text">Due Date must be greater than Current Date</p>
+        </div>
+      </div>
+
+      <div class="priority col-6">
+        <p for="priority" class="field-label">Priority</p>
+        <select class="input-form" name="priority" formControlName="priority">
+          <option value="Low">Low</option>
+          <option value="Normal">Normal</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="child-field">
+      <button type="button" class="btn btn-success primary-button" (click)="updateWork()" [disabled]="!updateForm.valid">Update</button>
+    </div>
+  </form>
+</div>

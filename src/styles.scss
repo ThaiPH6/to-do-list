@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+.primary-button {
+  width: 100%;
+}
+
+.main-container {
+  border: 1px solid;
+  margin: auto;
+  width: 50%;
+  padding: 30px;
+
+  .header-content {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.input-form {
+  height: 30px;
+}
+
+.field-label {
+  font-weight: bold;
+}
+
+.child-field {
+  margin-top: 20px;
+}
+
+.input-form {
+  width: 100%;
+}
+
+.error-text {
+  color: red;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
